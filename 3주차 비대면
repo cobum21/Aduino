@@ -1,0 +1,40 @@
+//4digit FND LED ON 공통 양극
+const unsigned int led[7] = { 2, 3, 4, 5, 6, 7, 8}; //FND led 핀
+
+const unsigned int com[1 + 4] = { 1, 9, 10, 11, 12};//COM핀/공통전원 핀
+const unsigned int nim[10][7] = {
+  { 0, 0, 0, 0, 0, 0, 1}, //0
+  { 1, 0, 0, 1, 1, 1, 1}, //1
+  { 0, 0, 1, 0, 0, 1, 0}, //2
+  { 0, 0, 0, 0, 1, 1, 0}, //3 
+  { 1, 0, 0, 1, 1, 0, 0}, //4
+  { 0, 1, 0, 0, 1, 0, 0}, //5
+  { 0, 1, 0, 0, 0, 0, 0}, //6
+  { 0, 0, 0, 1, 1, 0, 1}, //7
+  { 0, 0, 0, 0, 0, 0, 0}, //8
+  { 0, 0, 0, 0, 1, 0, 0}, //9
+}; // 0~9 까지 수 
+void display_init(){
+  //핀모드 OUPPUT 출력으로 선언
+  for(int x=0;x<7;x++){
+    pinMode(led[x],OUTPUT);
+    }
+  for(int y=1;y<5;y++){
+    pinMode(com[y],OUTPUT);
+    }
+}
+void display_all(){
+  for(int x=0;x<7;x++){
+    digitalWrite(led[x],LOW);//공통양극 : LED ON
+  }
+  for(int y=1;y<5;y++){
+    digitalWrite(com[y],HIGH);//공통양극
+    //delay(1000);
+  }
+}
+void setup() {
+  display_init();//핀모드 출력모드 선언
+  display_all();
+}
+void loop(){
+}
