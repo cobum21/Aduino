@@ -1,0 +1,84 @@
+#include <LedControl.h>
+
+#include <LedControl.h>
+LedControl lc = LedControl(12,11,10,1);
+void setup () {
+  lc.shutdown(0,true);
+  lc.setLed(0,0,0,HIGH);//행 열 HIGH
+  lc.setLed(0,0,7,HIGH);//행 열 HIGH
+ 
+  
+  }
+
+void loop () {}
+
+
+/*핀모드 세팅먼저*/ 
+void setup() {
+  pinMode(9,OUTPUT);
+  pinMode(10,OUTPUT);
+  analogWrite(9,0);
+  analogWrite(10,0);  
+  Serial.begin(9600);
+}
+
+void loop() {
+  if(Serial.available()>0){
+  int pwm = Serial.parseInt();//정수형으로 값을 읽음
+  analogWrite(10,pwm);
+  delay(50);
+  Serial.println(pwm);//시리얼 프린트 = 돋보기 누르면 출력 됨
+  }
+}
+//
+//
+//void loop() {
+//  int input = analogRead(A0);//전압 0 ~ 1023
+//  int pwm = map(input,0,1024,0,255); //맵함수
+//  analogWrite(9,0);
+//  analogWrite(10,pwm);
+//  Serial.print("INPUT : ");
+//  Serial.print(input); 
+//  Serial.print(", PWM : ");
+//  Serial.println(pwm);
+//  Serial.println();
+//  delay(200);
+//  }
+
+
+
+
+
+
+
+//void loop() {
+//  for( int pwm =0; pwm<256; pwm++){
+//    analogWrite (9,0);
+//    analogWrite (10,pwm);
+//    delay(50);
+//    Serial.print("pwm=");
+//    Serial.print(pwm);
+//  }
+//  delay(1000);analogWrite(9,0);analogWrite(10,0); delay(1000);
+//  for( int pwm =0; pwm<256; pwm++){
+//  analogWrite(9,0);
+//  analogWrite(10,0);
+//  delay
+//  }
+//}
+
+
+//
+//void loop() {
+//    digitalWrite(9,1);
+//    digitalWrite(10,0);
+//    delay(3000);
+//    digitalWrite(9,LOW);
+//    delay(2000);
+//    digitalWrite(9,0);
+//    digitalWrite(10,1);
+//    delay(3000);
+//    digitalWrite(10,LOW);
+//    delay(2000);
+//}
+
