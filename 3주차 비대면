@@ -38,3 +38,119 @@ void setup() {
 }
 void loop(){
 }
+
+
+//4digit FND LED ON
+//첫번째 fFND 0 ~ 9 test 배열처리
+const unsigned int led[7] = {2, 3, 4, 5, 6,7 ,8};
+                            //FND led 핀
+const unsigned int num[10][7] = {
+  { 0, 0, 0, 0, 0, 0, 1},
+  { 1, 0, 0, 1, 1, 1, 1},
+  { 0, 0, 1, 0, 0, 1, 0},
+  { 0, 0, 0, 0, 1, 1, 0},
+  { 1, 0, 1, 1, 0, 0, 1},
+  { 0, 1, 0, 0, 1, 0, 0},
+  { 0, 1, 0, 0, 0, 0, 0},
+  { 0, 0, 0, 1, 1, 0, 1},
+  { 0, 0, 0, 0, 0, 0, 0},
+  { 0, 0, 0, 0, 1, 0, 0},  
+}; 
+
+
+void setup() {
+  pinMode(9,OUTPUT);
+  for(int x=0;x<7;x++){
+    pinMode(led[x],OUTPUT);
+  }
+  digitalWrite(9,HIGH);
+  delay(1000);
+  digitalWrite(9,LOW);
+  for(int x=0;x<7;x++){
+    digitalWrite(led[x],HIGH);
+  }
+  delay(3000);
+}
+void loop(){
+  digitalWrite(9,HIGH);
+  for(int row = 0;row<10;row++){
+    for(int x=0;x<7;x++){
+      digitalWrite(led[x],num[row][x]);
+    }
+    delay(500);
+  }
+  digitalWrite(9,LOW);
+  delay(500);
+}
+
+
+
+//최종
+//4digit FND LED ON 공통 양극
+const unsigned int led[7] = { 2, 3, 4, 5, 6, 7, 8}; //FND led 핀
+
+const unsigned int com[1 + 4] = { -1, 9, 10, 11, 12};//COM핀/공통전원 핀
+const unsigned int num[10][7] = {
+  { 0, 0, 0, 0, 0, 0, 1}, //0
+  { 1, 0, 0, 1, 1, 1, 1}, //1
+  { 0, 0, 1, 0, 0, 1, 0}, //2
+  { 0, 0, 0, 0, 1, 1, 0}, //3 
+  { 1, 0, 0, 1, 1, 0, 0}, //4
+  { 0, 1, 0, 0, 1, 0, 0}, //5
+  { 0, 1, 0, 0, 0, 0, 0}, //6
+  { 0, 0, 0, 1, 1, 0, 1}, //7
+  { 0, 0, 0, 0, 0, 0, 0}, //8
+  { 0, 0, 0, 0, 1, 0, 0}, //9
+}; // 0~9 까지 수 
+void display_init(){
+  //핀모드 OUPPUT 출력으로 선언
+  for(int x=0;x<7;x++){
+    pinMode(led[x],OUTPUT);
+    }
+  for(int y=1;y<5;y++){
+    pinMode(com[y],OUTPUT);
+    }
+}
+void display_all(){
+  for(int x=0;x<7;x++){
+    digitalWrite(led[x],LOW);//공통양극 : LED ON
+  }
+  for(int y=1;y<5;y++){
+    digitalWrite(com[y],HIGH);//공통양극
+    //delay(1000);
+  }
+}
+void display_clear(){
+  for(int x=0;x<7;x++){
+    digitalWrite(led[x],HIGH);
+    //delay(1000);
+  }
+  for(int y=1;y<5;y++){
+    digitalWrite(com[y],LOW);
+   // delay(1000);
+  }
+}
+void display_number(unsigned int digit, unsigned int col) {
+  display_clear();
+  digitalWrite(com[col],HIGH);
+  for(int x=0;x<7;x++){ 
+    digitalWrite(led[x],num[digit][x]);
+  }
+}
+void setup() {
+  display_init();//핀모드 출력모드 선언
+  display_all();//첫째자리 부터 출력
+  display_clear(); //FND a 부터 꺼짐
+}
+void loop(){
+  display_number(7,1);
+  delay(500);
+  display_number(2,2); 
+  delay(500);
+  display_number(1,3);
+  delay(500);
+  display_number(6,4);
+  delay(500);
+}
+
+
