@@ -123,4 +123,21 @@ void loop() {
 
 
 
+#include <SoftwareSerial.h>
+SoftwareSerial btSerial = SoftwareSerial(2,3);
+int redLedPin = 11;
+int yellowLedPin = 10;
+int greenLedPin = 9;
+int blueLedPin = 8;
+void setup() {
+  for(int LedPin=8;LedPin<=11;LedPin++){
+    pinMode(LedPin,OUTPUT);
+  }
+  for(int LedPin=8;LedPin<=11;LedPin++){
+    digitalWrite(LedPin,1);
+    delay(500);
+  }
+}
+void loop() {
+  }
 
