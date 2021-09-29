@@ -1,0 +1,126 @@
+//4digit FND LED ON 공통 양극
+const unsigned int led[7] = { 2, 3, 4, 5, 6, 7, 8}; //FND led 핀
+//const unsigned int my_phone_number = {0, 0, 0, 1, 0, 7, 2, 1, 6, 1, 0, 4, 9}; 
+const unsigned int com[1 + 4] = { -1, 9, 10, 11, 12};//COM핀/공통전원 핀
+const unsigned int num[10][7] = {
+  { 0, 0, 0, 0, 0, 0, 1}, //0
+  { 1, 0, 0, 1, 1, 1, 1}, //1
+  { 0, 0, 1, 0, 0, 1, 0}, //2
+  { 0, 0, 0, 0, 1, 1, 0}, //3 
+  { 1, 0, 0, 1, 1, 0, 0}, //4
+  { 0, 1, 0, 0, 1, 0, 0}, //5
+  { 0, 1, 0, 0, 0, 0, 0}, //6
+  { 0, 0, 0, 1, 1, 0, 1}, //7
+  { 0, 0, 0, 0, 0, 0, 0}, //8
+  { 0, 0, 0, 0, 1, 0, 0}, //9
+}; // 0~9 까지 수 
+void display_init(){
+  //핀모드 OUPPUT 출력으로 선언
+  for(int x=0;x<7;x++){
+    pinMode(led[x],OUTPUT);
+    }
+  for(int y=1;y<5;y++){
+    pinMode(com[y],OUTPUT);
+    }
+}
+void display_all(){
+  for(int x=0;x<7;x++){
+    digitalWrite(led[x],LOW);//공통양극 : LED ON
+  }
+  for(int y=1;y<5;y++){
+    digitalWrite(com[y],HIGH);//공통양극
+    //delay(1);
+  }
+}
+void display_clear(){
+  for(int x=0;x<7;x++){
+    digitalWrite(led[x],HIGH);
+   // delay(1);
+  }
+  for(int y=1;y<5;y++){
+    digitalWrite(com[y],LOW);
+   // delay(1);
+  }
+}
+void display_number(unsigned int digit, unsigned int col) {
+  display_clear();
+  digitalWrite(com[col],HIGH);
+  for(int x=0;x<7;x++){ 
+    digitalWrite(led[x],num[digit][x]);
+  }
+}
+//void setup() {
+//  display_init();//핀모드 출력모드 선언
+//  display_all();//첫째자리 부터 출력
+//  display_clear(); //FND a 부터 꺼짐
+//}
+//void loop(){ 
+//  for (int a=0;a<10;a++){
+//    for(int b=0;b<10;b++){
+//      for(int c=0;c<10;c++){
+//        for(int d=0;d<10;d++){
+//        display_number(a,1);
+//        delay(1);
+//        display_number(b,2);
+//        delay(1);
+//        display_number(c,3);
+//        delay(1);
+//        display_number(d,4);
+//        delay(1);
+//      }
+//    }
+//  }
+// }
+//}
+
+
+// 1digit 4digit 섞어서 회로 연결 - 시험
+//
+
+void display_numbers(unsigned int num){
+  unsigned int num_1000 = num / 1000; //첫번째 digit 1000의 자리
+  unsigned int num_100 = (num%1000)/100; //첫번째 digit 1000의 자리
+  unsigned int num_10 = (num%100)/10; //첫번째 digit 1000의 자리
+  unsigned int num_1 = (num%10)/1; //첫번째 digit 1000의 자리
+  display_number(num_1000, 1);
+  delay(1);
+  display_number(num_100, 2);
+  delay(1);
+  display_number(num_10, 3);
+  delay(1);
+  display_number(num_1, 4);
+  delay(1);
+}
+void setup(){
+  display_init ();//핀모드 출력모드 선언 
+  display_all();// 첫째자리 부터 출력 
+  delay(1000);
+  display_clear();
+  delay(1000);
+}
+int count = 0;
+void loop() {
+  int cnt_print = 0;
+  while(1){
+    display_numbers(count);
+    cnt_print++;
+    if(cnt_print == 25) //25회 수행 : 25*4 = 100
+    break;              //10의 자리 기준 1초 
+  }
+  count++;
+  if(count>9999)
+  count = 0;
+}
+// 
+
+
+
+
+
+
+
+
+
+
+
+
