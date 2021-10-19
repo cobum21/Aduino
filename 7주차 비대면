@@ -1,0 +1,119 @@
+// 1. FND_on
+int led_a = 2;
+int led_b = 3;
+int led_c = 4;
+int led_d = 5;
+int led_e = 6;
+int led_f = 7;
+int led_g = 8;
+
+void setup() {
+  //led 초기화
+  pinMode(led_a,OUTPUT);
+  pinMode(led_b,OUTPUT);
+  pinMode(led_c,OUTPUT);
+  pinMode(led_d,OUTPUT);
+  pinMode(led_e,OUTPUT);
+  pinMode(led_f,OUTPUT);
+  pinMode(led_g,OUTPUT);
+}
+
+void loop() {
+  //led켜기
+  digitalWrite(led_a,HIGH);
+  digitalWrite(led_b,HIGH);
+  digitalWrite(led_c,HIGH);
+  digitalWrite(led_d,HIGH);
+  digitalWrite(led_e,HIGH);
+  digitalWrite(led_f,HIGH);
+  digitalWrite(led_g,HIGH);
+}
+
+// 2. FND_0~9만들기
+int led_a = 2;
+int led_a = 3;
+int led_a = 4;
+int led_a = 5;
+int led_a = 6;
+int led_a = 7;
+int led_a = 8;
+
+void setup() {
+  //led 초기화
+  pinMode(led_a,OUTPUT);
+  pinMode(led_b,OUTPUT);
+  pinMode(led_c,OUTPUT);
+  pinMode(led_d,OUTPUT);
+  pinMode(led_e,OUTPUT);
+  pinMode(led_f,OUTPUT);
+  pinMode(led_g,OUTPUT);
+}
+void loop
+  //0 켜기
+  digitalWrite(led_a,HIGH);
+  digitalWrite(led_b,HIGH);
+  digitalWrite(led_c,HIGH);
+  digitalWrite(led_d,HIGH);
+  digitalWrite(led_e,HIGH);
+  digitalWrite(led_f,HIGH);
+  digitalWrite(led_g,LOW);
+  delay(1000);
+  //1 켜기
+  digitalWrite(led_a,LOW);
+  digitalWrite(led_b,HIGH);
+  digitalWrite(led_c,HIGH);
+  digitalWrite(led_d,LOW);
+  digitalWrite(led_e,LOW);
+  digitalWrite(led_f,LOW);
+  digitalWrite(led_g,LOW);
+  delay(1000);
+  //2 켜기
+  digitalWrite(led_a,HIGH);
+  digitalWrite(led_b,HIGH);
+  digitalWrite(led_c,LOW);
+  digitalWrite(led_d,HIGH);
+  digitalWrite(led_e,HIGH);
+  digitalWrite(led_f,LOW);
+  digitalWrite(led_g,HIGH);
+  delay(1000);
+  //3 켜기
+  digitalWrite(led_a,HIGH);
+  digitalWrite(led_b,HIGH);
+  digitalWrite(led_c,HIGH);
+  digitalWrite(led_d,HIGH);
+  digitalWrite(led_e,LOW);
+  digitalWrite(led_f,LOW);
+  digitalWrite(led_g,HIGH);
+  delay(1000);
+
+//_4_FND_btserial
+#include<SoftwareSerial.h>
+SofrwareSerial btSerial = SofrwareSerial(9,10);
+
+int led_a = 2;
+int led_b = 3;
+int led_c = 4;
+int led_d = 5;
+int led_e = 6;
+int led_f = 7;
+int led_g = 8;
+void setup() {
+  //lde초기화
+  pinMode(led_a,OUTPUT);
+  pinMode(led_b,OUTPUT);
+  pinMode(led_c,OUTPUT);
+  pinMode(led_d,OUTPUT);
+  pinMode(led_e,OUTPUT);
+  pinMode(led_f,OUTPUT);
+  pinMode(led_g,OUTPUT);
+  Serial.begin(9600);
+  btSerial.begin(9600);
+}
+void loop() {
+  if(btSerial.available()>0{
+    char btData = btSerial.read();
+    if(btData == '0'){
+      //0 켜기
+    }
+  }
+}
