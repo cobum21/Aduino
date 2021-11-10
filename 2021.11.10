@@ -1,0 +1,185 @@
+https://www.dropbox.com/sh/ir2720zq11eaqew/AADJ5zS-AhY6cmihyCloVCeia?dl=0
+
+//12/08 프로젝트 
+//1. nfc/블루투스 이용해 잃어버린 물건 찾기 (리모컨 하나에 모든걸 연결)
+//2. 간단한 iot구조 
+//3. rc카 + vr 
+//1. 수퍼루프 구조 / millis 함수 / blink예제 / fading 예제
+
+
+//void setup() {
+//  pinMode(13,OUTPUT);
+//  pinMode(11,OUTPUT);
+//  //digitalWrite(13,1);
+//  //digitalWrite(13,1);
+//}
+//
+//void loop() {
+//  digitalWrite(13,1);
+//  delay(1000);
+//  digitalWrite(13,0);
+//  delay(1000);
+////fading
+// for(int fadeValue = 0;fadeValue<=255;fadeValue++){
+//  analogWrite(11,fadeValue);
+//  delay(30);  
+// }
+// for(int fadeValue = 255;fadeValue>=0;fadeValue--){
+//  analogWrite(11,fadeValue);
+//  delay(30);
+// }
+//}
+
+//
+//const int ledPin = 13;
+//int ledState = Low;
+//long previousMillis = 0;
+//long interval = 1000;
+//void setup() { 
+//  pinMode(ledPin,OUTPUT);
+//}
+//void loop() {
+//  unsigned long currentMillis = millis();
+//  Serial.println(currentMillis);
+// 
+//  if(currentMillis- previousMillis >= interval) {
+//    previousMillis = currentMillis;
+//
+//    if(ledState == LOW)
+//    ledState = HIGH;
+//    else ledState = LOW;
+//
+//    digitalWrite(ledPin,ldeState);
+//  }
+//}
+
+
+//06_blink_fading_millis
+
+//int blink_ledState = LOW;
+//long blink_previousMillis = 0;
+//long blink_interval = 1000;
+//
+//void blink_setup(){
+//  pinMode(13,OUTPUT);
+//}
+//void blink_loop(){
+//  unsigned long currentMillis = millis();
+//
+//  if(currentMillis- blink_previousMillis >= blink_interval) {//blink_if
+//     blink_previousMillis = currentMillis;
+// 
+//     if(blink_ledState == LOW)
+//        blink_ledState = HIGH;
+//     else blink_ledState = LOW;
+//
+//     digitalWrite(13,blink_ledState);
+//  }//blink_if
+//}//blink_loop()
+//
+//int fading_ledPin = 11;
+//int fadeValue = 0;
+//int fadeDir = 1;
+//long fading_previousMillis = 0;
+//long fading_interval = 30;
+//
+//void fading_setup(){}
+//void fading_loop(){
+//  unsigned long currentMillis = millis();
+//  if(currentMillis - fading_previousMillis >= fading_interval){//1
+//    fading_previousMillis = currentMillis;
+//    if(fadeDir == 1){//2
+//          if(fadeValue <=255){//3
+//              fadeValue += 5;
+//              if(fadeValue > 255){//4
+//                fadeValue = 255;
+//                fadeDir = 0;
+//              }//4
+//          }//3
+//    }//2
+//    else{//2
+//          if(fadeValue >=0 ){//3_1
+//              fadeValue -= 5;
+//              if(fadeValue < 0){//4_1
+//                fadeValue = 0;
+//                fadeDir = 1;
+//              }//4_1
+//          }//3_1
+//    }//2
+//    analogWrite(fading_ledPin,fadeValue);
+//  }//1
+//}
+//
+//void setup() {
+//  blink_setup();
+//  fading_setup();
+//}
+//void loop(){
+//  blink_loop();
+//  fading_loop();
+//}
+
+//audino_super loop
+void setup() {
+  blink_setup();
+  fading_setup();
+}
+
+void loop() {
+  blink_loop();
+  fading_loop();
+  
+}
+
+blink문
+int blink_ledState = LOW;
+long blink_previosMillis = 0;
+long blink_interval = 1000;
+
+void blink_setup() {
+  pinMode(13,OUTPUT); }
+void blink_loop(){
+  unsigned long currentMillis = millis();
+  if (currentMillis - blink_previosMillis >= blink_interval){
+    blink_previosMillis = currentMillis;
+    if(blink_ledState == LOW)
+       blink_ledState = HIGH;
+    else
+      blink_ledState = LOW;
+    digitalWrite(13,blink_ledState);
+  }
+}
+fading 문
+int fading_ledPin = 11;
+int fadeValue = 0;
+int fadeDir = 1;
+
+long fading_previousMillis = 0;
+long fading_interval = 30;
+
+void fading_setup(){}
+void fading_loop(){
+  unsigned long currentMillis = millis();
+  if(currentMillis - fading_previousMillis >= fading_interval){//1
+    fading_previousMillis = currentMillis;
+    if(fadeDir == 1){//2
+          if(fadeValue <=255){//3
+              fadeValue += 5;
+              if(fadeValue > 255){//4
+                fadeValue = 255;
+                fadeDir = 0;
+              }//4
+          }//3
+    }//2
+    else{//2
+          if(fadeValue >=0 ){//3_1
+              fadeValue -= 5;
+              if(fadeValue < 0){//4_1
+                fadeValue = 0;
+                fadeDir = 1;
+              }//4_1
+          }//3_1
+    }//2
+    analogWrite(fading_ledPin,fadeValue);
+  }//1
+}
